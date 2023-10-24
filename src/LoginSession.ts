@@ -444,7 +444,7 @@ export default class LoginSession extends TypedEmitter<LoginSessionEvents> {
 			this._steamGuardMachineToken = details.steamGuardMachineToken;
 		}
 
-		let encryptionResult = await this._handler.encryptPassword(details.accountName, details.password);
+		let encryptionResult = await this._handler.encryptPassword(details.accountName, details.password, this);
 		this.emit('debug', 'encrypt password response', encryptionResult);
 
 		this._startSessionResponse = await this._handler.startSessionWithCredentials({

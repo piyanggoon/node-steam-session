@@ -44,6 +44,7 @@ import {
 	StartAuthSessionWithQrResponse,
 	SubmitSteamGuardCodeRequest
 } from './interfaces-internal';
+import LoginSession from './LoginSession';
 
 const debug = createDebug('steam-session:AuthenticationClient');
 
@@ -83,12 +84,14 @@ export default class AuthenticationClient extends EventEmitter {
 		});
 	}
 
-	async encryptPassword(accountName: string, password: string): Promise<{encryptedPassword: string, keyTimestamp: string}> {
-		this.emit('debug', 'accountName', accountName);
-		this.emit('debug', 'password', password);
-
+	async encryptPassword(accountName: string, password: string, self?: LoginSession): Promise<{encryptedPassword: string, keyTimestamp: string}> {
 		let rsaInfo = await this.getRsaKey(accountName);
-		this.emit('debug', 'RSA info', rsaInfo);
+
+		if (self) {
+			self.emit('debug', 'accountName', accountName);
+			self.emit('debug', 'password', password);
+			self.emit('debug', 'RSA info', rsaInfo);
+		}
 
 		let key = new RSAKey();
 		key.setPublic(rsaInfo.publickey_mod, rsaInfo.publickey_exp);
