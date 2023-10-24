@@ -55,11 +55,6 @@ export interface ConstructorOptions {
 
 export interface StartLoginSessionWithCredentialsDetails {
 	/**
-	 * Your Steam account's SteamID64.
-	 */
-	steamId?: string;
-
-	/**
 	 * Your Steam account's login name.
 	 */
 	accountName: string;

@@ -445,6 +445,7 @@ export default class LoginSession extends TypedEmitter<LoginSessionEvents> {
 		}
 
 		let encryptionResult = await this._handler.encryptPassword(details.accountName, details.password);
+		this.emit('debug', 'encrypt password response', encryptionResult);
 
 		this._startSessionResponse = await this._handler.startSessionWithCredentials({
 			accountName: details.accountName,
@@ -454,11 +455,6 @@ export default class LoginSession extends TypedEmitter<LoginSessionEvents> {
 			// use a manually-specified token with priority over a token saved on this object
 			steamGuardMachineToken: details.steamGuardMachineToken || this.steamGuardMachineToken
 		});
-
-		if (details.steamId) {
-			// @ts-ignore
-			this._startSessionResponse.steamId = details.steamId;
-		}
 
 		this.emit('debug', 'start session response', this._startSessionResponse);
 
