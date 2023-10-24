@@ -49,7 +49,7 @@ export interface CMsgGCRoutingProtoBufHeader {
 }
 
 export interface CMsgProtoBufHeader {
-	steamid?: string;
+	steamid?: Buffer;
 	client_sessionid?: number;
 	routing_appid?: number;
 	jobid_source?: string;
@@ -93,7 +93,7 @@ export interface CMsgProtobufWrapped {
 export interface CMsgAuthTicket {
 	estate?: number;
 	eresult?: EResult;
-	steamid?: string;
+	steamid?: Buffer;
 	gameid?: string;
 	h_steam_pipe?: number;
 	ticket_crc?: number;
@@ -203,7 +203,7 @@ export interface CCommunity_ClanAnnouncementInfo {
 
 export interface CClanEventData {
 	gid?: string;
-	clan_steamid?: string;
+	clan_steamid?: Buffer;
 	event_name?: string;
 	event_type?: EProtoClanEventType;
 	appid?: number;
@@ -212,8 +212,8 @@ export interface CClanEventData {
 	rtime32_start_time?: number;
 	rtime32_end_time?: number;
 	comment_count?: number;
-	creator_steamid?: string;
-	last_update_steamid?: string;
+	creator_steamid?: Buffer;
+	last_update_steamid?: Buffer;
 	event_notes?: string;
 	jsondata?: string;
 	announcement_body?: CCommunity_ClanAnnouncementInfo;
@@ -302,7 +302,7 @@ export interface CAuthentication_AllowedConfirmation {
 }
 
 export interface CAuthentication_BeginAuthSessionViaQR_Response {
-	client_id?: string;
+	client_id?: Buffer;
 	challenge_url?: string;
 	request_id?: Buffer;
 	interval?: number;
@@ -326,24 +326,24 @@ export interface CAuthentication_BeginAuthSessionViaCredentials_Request {
 }
 
 export interface CAuthentication_BeginAuthSessionViaCredentials_Response {
-	client_id?: string;
+	client_id?: Buffer;
 	request_id?: Buffer;
 	interval?: number;
 	allowed_confirmations?: CAuthentication_AllowedConfirmation[];
-	steamid?: string;
-	weak_token?: string;
+	steamid?: Buffer;
+	weak_token?: Buffer;
 	agreement_session_url?: string;
 	extended_error_message?: string;
 }
 
 export interface CAuthentication_PollAuthSessionStatus_Request {
-	client_id?: string;
+	client_id?: Buffer;
 	request_id?: Buffer;
 	token_to_revoke?: string;
 }
 
 export interface CAuthentication_PollAuthSessionStatus_Response {
-	new_client_id?: string;
+	new_client_id?: Buffer;
 	new_challenge_url?: string;
 	refresh_token?: string;
 	access_token?: string;
@@ -354,7 +354,7 @@ export interface CAuthentication_PollAuthSessionStatus_Response {
 }
 
 export interface CAuthentication_GetAuthSessionInfo_Request {
-	client_id?: string;
+	client_id?: Buffer;
 }
 
 export interface CAuthentication_GetAuthSessionInfo_Response {
@@ -374,8 +374,8 @@ export interface CAuthentication_GetAuthSessionInfo_Response {
 
 export interface CAuthentication_UpdateAuthSessionWithMobileConfirmation_Request {
 	version?: number;
-	client_id?: string;
-	steamid?: string;
+	client_id?: Buffer;
+	steamid?: Buffer;
 	signature?: Buffer;
 	confirm?: boolean;
 	persistence?: ESessionPersistence;
@@ -385,8 +385,8 @@ export interface CAuthentication_UpdateAuthSessionWithMobileConfirmation_Respons
 }
 
 export interface CAuthentication_UpdateAuthSessionWithSteamGuardCode_Request {
-	client_id?: string;
-	steamid?: string;
+	client_id?: Buffer;
+	steamid?: Buffer;
 	code?: string;
 	code_type?: EAuthSessionGuardType;
 }
@@ -397,7 +397,7 @@ export interface CAuthentication_UpdateAuthSessionWithSteamGuardCode_Response {
 
 export interface CAuthentication_AccessToken_GenerateForApp_Request {
 	refresh_token?: string;
-	steamid?: string;
+	steamid?: Buffer;
 	renewal_type?: ETokenRenewalType;
 }
 
@@ -445,7 +445,7 @@ export interface CAuthentication_GetAuthSessionsForAccount_Response {
 }
 
 export interface CAuthentication_MigrateMobileSession_Request {
-	steamid?: string;
+	steamid?: Buffer;
 	token?: string;
 	signature?: string;
 }
@@ -465,7 +465,7 @@ export interface CAuthentication_Token_Revoke_Response {
 
 export interface CAuthentication_RefreshToken_Revoke_Request {
 	token_id?: string;
-	steamid?: string;
+	steamid?: Buffer;
 	revoke_action?: EAuthTokenRevokeAction;
 	signature?: Buffer;
 }
@@ -474,7 +474,7 @@ export interface CAuthentication_RefreshToken_Revoke_Response {
 }
 
 export interface CAuthenticationSupport_QueryRefreshTokensByAccount_Request {
-	steamid?: string;
+	steamid?: Buffer;
 	include_revoked_tokens?: boolean;
 }
 
@@ -484,7 +484,7 @@ export interface CSupportRefreshTokenDescription {
 	time_updated?: number;
 	platform_type?: EAuthTokenPlatformType;
 	token_state?: EAuthTokenState;
-	owner_steamid?: string;
+	owner_steamid?: Buffer;
 	os_platform?: number;
 	os_type?: number;
 	auth_type?: number;
@@ -516,7 +516,7 @@ export interface CAuthenticationSupport_QueryRefreshTokenByID_Response {
 
 export interface CAuthenticationSupport_RevokeToken_Request {
 	token_id?: string;
-	steamid?: string;
+	steamid?: Buffer;
 }
 
 export interface CAuthenticationSupport_RevokeToken_Response {
@@ -687,7 +687,7 @@ export interface CMsgClientLogonResponse {
 	deprecated_use_pics?: boolean;
 	vanity_url?: string;
 	public_ip?: CMsgIPAddress;
-	client_supplied_steamid?: string;
+	client_supplied_steamid?: Buffer;
 	ip_country_code?: string;
 	parental_settings?: Buffer;
 	parental_setting_signature?: Buffer;
@@ -741,7 +741,7 @@ export interface CMsgClientAccountInfo {
 }
 
 export interface CMsgClientChallengeRequest {
-	steamid?: string;
+	steamid?: Buffer;
 }
 
 export interface CMsgClientChallengeResponse {

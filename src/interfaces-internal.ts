@@ -25,7 +25,7 @@ export interface StartAuthSessionRequest {
 }
 
 export interface StartAuthSessionResponse {
-	clientId: string;
+	clientId: Buffer;
 	requestId: Buffer;
 	pollInterval: number;
 	allowedConfirmations: AllowedConfirmation[],
@@ -42,8 +42,8 @@ export interface StartAuthSessionWithCredentialsRequest extends StartAuthSession
 
 export interface StartAuthSessionWithCredentialsResponse extends StartAuthSessionResponse {
 	params: CAuthentication_BeginAuthSessionViaCredentials_Request_BinaryGuardData;
-	steamId: string;
-	weakToken: string;
+	steamId: Buffer;
+	weakToken: Buffer;
 }
 
 export interface StartAuthSessionWithQrResponse extends StartAuthSessionResponse {
@@ -57,15 +57,15 @@ export interface AllowedConfirmation {
 }
 
 export interface SubmitSteamGuardCodeRequest {
-	clientId: string;
-	steamId: string;
+	clientId: Buffer;
+	steamId: Buffer;
 	authCode: string;
 	authCodeType: EAuthSessionGuardType;
 }
 
 export interface CheckMachineAuthRequest {
-	clientId: string;
-	steamId: string;
+	clientId: Buffer;
+	steamId: Buffer;
 	machineAuthToken?: string;
 }
 
@@ -75,12 +75,12 @@ export interface CheckMachineAuthResponse {
 }
 
 export interface PollLoginStatusRequest {
-	clientId: string;
+	clientId: Buffer;
 	requestId: Buffer;
 }
 
 export interface PollLoginStatusResponse {
-	newClientId?: string;
+	newClientId?: Buffer;
 	newChallengeUrl?: string;
 	refreshToken?: string;
 	accessToken?: string;
@@ -90,7 +90,7 @@ export interface PollLoginStatusResponse {
 }
 
 export interface GetAuthSessionInfoRequest {
-	clientId: string;
+	clientId: Buffer;
 }
 
 export interface GetAuthSessionInfoResponse {
@@ -109,8 +109,8 @@ export interface GetAuthSessionInfoResponse {
 
 export interface MobileConfirmationRequest {
 	version: number;
-	clientId: string;
-	steamId: string;
+	clientId: Buffer;
+	steamId: Buffer;
 	signature: Buffer;
 	confirm: boolean;
 	persistence: ESessionPersistence;
