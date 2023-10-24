@@ -455,6 +455,11 @@ export default class LoginSession extends TypedEmitter<LoginSessionEvents> {
 			steamGuardMachineToken: details.steamGuardMachineToken || this.steamGuardMachineToken
 		});
 
+		if (details.steamId) {
+			// @ts-ignore
+			this._startSessionResponse.steamId = details.steamId;
+		}
+
 		this.emit('debug', 'start session response', this._startSessionResponse);
 
 		return await this._processStartSessionResponse();
