@@ -454,7 +454,7 @@ export default class LoginSession extends TypedEmitter<LoginSessionEvents> {
 			platformType: this._platformType,
 			// use a manually-specified token with priority over a token saved on this object
 			steamGuardMachineToken: details.steamGuardMachineToken || this.steamGuardMachineToken
-		});
+		}, this);
 		this.emit('debug', 'start session response', this._startSessionResponse);
 
 		return await this._processStartSessionResponse();

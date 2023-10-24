@@ -102,7 +102,7 @@ export default class AuthenticationClient extends EventEmitter {
 		};
 	}
 
-	async startSessionWithCredentials(details: StartAuthSessionWithCredentialsRequest): Promise<StartAuthSessionWithCredentialsResponse> {
+	async startSessionWithCredentials(details: StartAuthSessionWithCredentialsRequest, self?: any): Promise<StartAuthSessionWithCredentialsResponse> {
 		let {websiteId, deviceDetails} = this._getPlatformData();
 
 		let data:CAuthentication_BeginAuthSessionViaCredentials_Request_BinaryGuardData = {
@@ -134,8 +134,8 @@ export default class AuthenticationClient extends EventEmitter {
 			apiInterface: 'Authentication',
 			apiMethod: 'BeginAuthSessionViaCredentials',
 			apiVersion: 1,
-			data
-		});
+			data,
+		}, self);
 
 		return {
 			params: data,
@@ -301,7 +301,7 @@ export default class AuthenticationClient extends EventEmitter {
 		};
 	}
 
-	async sendRequest(request: RequestDefinition): Promise<any> {
+	async sendRequest(request: RequestDefinition, self?: any): Promise<any> {
 		// If a transport close is pending, cancel it
 		clearTimeout(this._transportCloseTimeout);
 
@@ -330,8 +330,12 @@ export default class AuthenticationClient extends EventEmitter {
 
 		// We need to decode the response data, if there was any
 		let responseData = result.responseData && result.responseData.length > 0 ? result.responseData : Buffer.alloc(0);
-		// let decodedData = responseProto.decode(responseData);
-		let decodedData = responseProto.decodeDelimited(responseData);
+		let decodedData = responseProto.decode(responseData);
+
+		if (self) {
+			self.emit('debug', result, decodedData);
+		}
+
 		return responseProto.toObject(decodedData, {longs: String});
 	}
 

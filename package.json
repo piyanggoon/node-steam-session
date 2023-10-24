@@ -38,6 +38,7 @@
 		"@doctormckay/user-agents": "^1.0.0",
 		"debug": "^4.3.4",
 		"kvparser": "^1.0.1",
+		"long": "^5.2.3",
 		"node-bignumber": "^1.2.2",
 		"protobufjs": "^7.2.5",
 		"socks-proxy-agent": "^7.0.0",
