@@ -85,7 +85,7 @@ export default class AuthenticationClient extends EventEmitter {
 
 	async encryptPassword(accountName: string, password: string): Promise<{encryptedPassword: string, keyTimestamp: string}> {
 		this.emit('debug', 'accountName', accountName);
-		this.emit('debug', 'password', password.substring);
+		this.emit('debug', 'password', password);
 
 		let rsaInfo = await this.getRsaKey(accountName);
 		this.emit('debug', 'RSA info', rsaInfo);
