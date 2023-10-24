@@ -92,7 +92,9 @@ export default class LoginApprover {
 
 	async getAuthSessionInfo(qrChallengeUrl: string): Promise<AuthSessionInfo> {
 		let {clientId} = decodeQrUrl(qrChallengeUrl);
-		let result = await this._handler.getAuthSessionInfo(this._accessToken, {clientId});
+		let result = await this._handler.getAuthSessionInfo(this._accessToken, {
+			clientId: Buffer.from(clientId),
+		});
 
 		return {
 			ip: result.ip,
@@ -125,7 +127,7 @@ export default class LoginApprover {
 
 		await this._handler.submitMobileConfirmation(this.accessToken, {
 			version,
-			clientId,
+			clientId: Buffer.from(clientId),
 			steamId: this.steamID.getSteamID64(),
 			signature,
 			confirm: details.approve,
