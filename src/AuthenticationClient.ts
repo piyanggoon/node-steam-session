@@ -333,7 +333,7 @@ export default class AuthenticationClient extends EventEmitter {
 		let decodedData = responseProto.decode(responseData);
 
 		if (self) {
-			self.emit('debug', result, decodedData);
+			self.emit('debug', 'sendRequest', decodedData);
 		}
 
 		// return responseProto.toObject(decodedData, {longs: String});
