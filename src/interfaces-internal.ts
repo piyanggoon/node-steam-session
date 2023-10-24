@@ -3,7 +3,7 @@ import EAuthTokenPlatformType from './enums-steam/EAuthTokenPlatformType';
 import EAuthSessionGuardType from './enums-steam/EAuthSessionGuardType';
 import EResult from './enums-steam/EResult';
 import EAuthSessionSecurityHistory from './enums-steam/EAuthSessionSecurityHistory';
-import {CAuthentication_DeviceDetails} from './protobuf-generated/types';
+import {CAuthentication_BeginAuthSessionViaCredentials_Request_BinaryGuardData, CAuthentication_DeviceDetails} from './protobuf-generated/types';
 import ITransport from './transports/ITransport';
 import {HttpClient} from '@doctormckay/stdlib/http';
 
@@ -41,6 +41,7 @@ export interface StartAuthSessionWithCredentialsRequest extends StartAuthSession
 }
 
 export interface StartAuthSessionWithCredentialsResponse extends StartAuthSessionResponse {
+	params: CAuthentication_BeginAuthSessionViaCredentials_Request_BinaryGuardData;
 	steamId: string;
 	weakToken: string;
 }
