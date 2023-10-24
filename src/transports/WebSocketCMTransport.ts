@@ -336,7 +336,7 @@ export default class WebSocketCMTransport implements ITransport {
 
 		return await new Promise((resolve, reject) => {
 			let protoHeader: CMsgProtoBufHeader = {
-				steamid: '0',
+				steamid: Buffer.alloc(0),
 				client_sessionid: eMsg != EMsg.ServiceMethodCallFromClientNonAuthed ? this._clientSessionId : 0,
 			};
 
