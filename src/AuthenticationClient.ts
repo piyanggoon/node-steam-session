@@ -84,19 +84,19 @@ export default class AuthenticationClient extends EventEmitter {
 		});
 	}
 
-	async encryptPassword(accountName: string, password: string, self?: LoginSession): Promise<{encryptedPassword: string, keyTimestamp: string}> {
+	async encryptPassword(accountName: string, password: string): Promise<{rsaInfo: { publickey_exp?: string, publickey_mod: string, timestamp: string }, rsaKey: string, encryptedPassword: string, keyTimestamp: string}> {
 		let rsaInfo = await this.getRsaKey(accountName);
-
-		if (self) {
-			self.emit('debug', 'accountName', accountName);
-			self.emit('debug', 'password', password);
-			self.emit('debug', 'RSA info', rsaInfo);
-		}
 
 		let key = new RSAKey();
 		key.setPublic(rsaInfo.publickey_mod, rsaInfo.publickey_exp);
 
 		return {
+			rsaInfo: {
+				publickey_exp: rsaInfo.publickey_exp,
+				publickey_mod: rsaInfo.publickey_mod,
+				timestamp: rsaInfo.timestamp
+			},
+			rsaKey: key,
 			encryptedPassword: hex2b64(key.encrypt(password)),
 			keyTimestamp: rsaInfo.timestamp
 		};
