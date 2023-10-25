@@ -337,7 +337,7 @@ export default class AuthenticationClient extends EventEmitter {
 		}
 
 		// return responseProto.toObject(decodedData, {longs: String});
-		return responseProto.toObject(decodedData, {longs: Buffer});
+		return responseProto.toObject(decodedData);
 	}
 
 	close(): void {

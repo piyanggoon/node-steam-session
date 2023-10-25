@@ -78,7 +78,7 @@ export default class WebApiTransport implements ITransport {
 			apiResponse.errorMessage = errorMessageHeader;
 		}
 
-		let resultBody:any = result.jsonBody || result.textBody || result.rawBody;
+		let resultBody:any = /*result.jsonBody || result.textBody ||*/ result.rawBody;
 		let isMeaningfulJsonBody = result.jsonBody && Object.keys(result.jsonBody).length > 0;
 		if (resultBody && (isMeaningfulJsonBody || resultBody.length > 0)) {
 			apiResponse.responseData = resultBody;
