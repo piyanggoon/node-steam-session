@@ -177,7 +177,7 @@ export default class LoginSession extends TypedEmitter<LoginSessionEvents> {
 		// There's a few places we could get a steamid from
 		if (this._startSessionResponse && (this._startSessionResponse as StartAuthSessionWithCredentialsResponse).steamId) {
 			const buffer = (this._startSessionResponse as StartAuthSessionWithCredentialsResponse).steamId
-				.toString()
+				.toString('utf8');
 			this.emit('debug', 'steamid from start session response', buffer);
 			return new SteamID(buffer);
 		} else if (this.accessToken || this.refreshToken) {
